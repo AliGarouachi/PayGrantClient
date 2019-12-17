@@ -5,33 +5,18 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Storage, IonicStorageModule } from '@ionic/storage';
-import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
 
-export function jwtOptionsFactory(storage) {
-  return {
-    tokenGetter: () => {
-      return storage.get('access_token');
-    },
-    whitelistedDomains: ['localhost:5000']
-  }
-}
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, HttpClientModule,IonicModule.forRoot(), AppRoutingModule,FormsModule,IonicStorageModule.forRoot(),
-    JwtModule.forRoot({
-      jwtOptionsProvider: {
-        provide: JWT_OPTIONS,
-        useFactory: jwtOptionsFactory,
-        deps: [Storage],
-      }
-    })],
+  imports: [BrowserModule, HttpClientModule,IonicModule.forRoot(),IonicStorageModule.forRoot(), AppRoutingModule,FormsModule],
   providers: [
     StatusBar,
     SplashScreen,BarcodeScanner,

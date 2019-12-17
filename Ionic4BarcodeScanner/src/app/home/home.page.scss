@@ -1,19 +1,10 @@
 
-
 :host {
     ion-content {
         --background: rgb(21, 32, 43);
         color:white;
     }
-    div{
-        padding: 5%;
-    }
-    h4{
-        color: white;
-        b{
-            float: right;
-        }
-    }
+    
     ion-item {
         border-radius: 0;
         border-bottom: 1px dotted var(--ion-color-medium);

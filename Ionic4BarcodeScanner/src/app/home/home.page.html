@@ -1,33 +1,43 @@
-
+<ion-header style="display: none;">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        <ion-text color="light" class="fw700">Application de generation</ion-text>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
  
-<ion-content ion-padding>
-<ion-card>
-    <div *ngIf="!scannedData">
-        <ion-button expand="full" (click)="scanCode()">
-          Scan Code
-        </ion-button>
-      </div>
-      
-     
-      <div *ngIf="scannedData">
-          <ion-button expand="full" (click)="scanCode()">
-              Scan another Code
-          </ion-button>
-        <div>
-          <h4>
-            Type de carburant : <b>{{ this.opperation["type_carburant"] }}</b>
-          </h4>
-          <h4>
-            Quantité en litre : <b>{{ this.opperation["quantite"] }}</b>
-          </h4>
-          <h4>
-            Prix total : <b>{{ this.opperation["prix_total"] }}</b>
-          </h4>
-        </div>
-        <ion-button ion-button expand="full" (click)="validation()">
-            Valider
-        </ion-button>
-      </div>
-</ion-card>
+<ion-content style="">
+    <ion-card class="bg-white">
+        <div *ngIf="!dataStored" >
+            <ion-button expand="full" (click)="scanCode()" full>
+                scan
+              </ion-button>
+          </div>
+          <div *ngIf="dataStored" style="color: white;">
+              <ion-button (click)="scanCode()">
+                  scan other data
+                </ion-button>
+              <h1 >Type de carburant</h1>
+              <ion-select #selectOfFuelType placeholder="Select One" (ionChange)="selectFuelType(selectOfFuelType.value)" >
+                <ion-select-option *ngFor="let f of fuel" value="{{f['prix']+'*'}}{{f['type']+' '}}{{f['denomination']}}">{{f["denomination"]}}</ion-select-option>
+                
+              </ion-select>
+              <div *ngIf="formOn">
+              <h1>Quantité (Litre)</h1>
+                <ion-input type="number" [(ngModel)]="opperation.fuelQuantity" (ionChange)="fillTotalPrice()"></ion-input>
+                <h1>Quantité (Argent)</h1>
+                <ion-input type="number" [(ngModel)]="opperation.totalPrice" (ionChange)="fillQuantity()"></ion-input>
+              <ion-button (click)="encodedText()">
+                Generate QR code
+              </ion-button>
+            </div>
+          </div>
+    </ion-card>
+  
   
 </ion-content>

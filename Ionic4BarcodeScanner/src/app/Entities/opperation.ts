@@ -1,5 +1,5 @@
 import {FuelType} from "./fuel-type.enum";
-import {FuelService} from "../Services/fuel/fuel.service";
+import {FuelService} from "../Services/fuel.service";
 export class Opperation {
   kioskKey :any;
   index:any ='SHC';
@@ -16,13 +16,12 @@ export class Opperation {
   }
   generateQrString()
   { 
-    
     let data = {
-      fuelQuantity : this.fuelQuantity,
-      fuelType : this.fuelType,
-      totalPrice : this.totalPrice,
-      kioskName : this.kioskKey,
-      index : this.index
+      "quantite" : this.fuelQuantity,
+      "type-carburant" : this.fuelType,
+      "index" : this.index,
+      "nom-kioske" : this.kioskKey,
+      "prix-total" : this.totalPrice
     }
     return JSON.stringify(data);
     
