@@ -1,0 +1,33 @@
+
+ 
+<ion-content ion-padding>
+<ion-card>
+    <div *ngIf="!scannedData">
+        <ion-button expand="full" (click)="scanCode()">
+          Scan Code
+        </ion-button>
+      </div>
+      
+     
+      <div *ngIf="scannedData">
+          <ion-button expand="full" (click)="scanCode()">
+              Scan another Code
+          </ion-button>
+        <div>
+          <h4>
+            Type de carburant : <b>{{ this.opperation["type_carburant"] }}</b>
+          </h4>
+          <h4>
+            Quantité en litre : <b>{{ this.opperation["quantite"] }}</b>
+          </h4>
+          <h4>
+            Prix total : <b>{{ this.opperation["prix_total"] }}</b>
+          </h4>
+        </div>
+        <ion-button ion-button expand="full" (click)="validation()">
+            Valider
+        </ion-button>
+      </div>
+</ion-card>
+  
+</ion-content>
